@@ -4,27 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Services\InternetServiceProvider\Mpt;
 use App\Services\InternetServiceProvider\Ooredoo;
+use App\Services\InternetServiceProvider\WifiInvoiceCaculator;
 use Illuminate\Http\Request;
 
 class InternetServiceProviderController extends Controller
 {
-    public function getMptInvoiceAmount(Request $request)
+
+    public function getMptInvoiceAmount(Request $request, WifiInvoiceCaculator $wifiInvoiceCaculator)
     {
-        $mpt = new Mpt();
-        $mpt->setMonth($request->get('month') ?: 1);
-        $amount = $mpt->calculateTotalAmount();
-        
+        $wifiInvoiceCaculator->setMonth($request->get('month', 1));
+        $amount = $wifiInvoiceCaculator->calculateTotalAmount(new Mpt());
+
         return response()->json([
             'data' => $amount
         ]);
     }
-    
-    public function getOoredooInvoiceAmount(Request $request)
+
+    public function getOoredooInvoiceAmount(Request $request, WifiInvoiceCaculator $wifiInvoiceCaculator)
     {
-        $ooredoo = new Ooredoo();
-        $ooredoo->setMonth($request->get('month') ?: 1);
-        $amount = $ooredoo->calculateTotalAmount();
-        
+        $wifiInvoiceCaculator->setMonth($request->get('month', 1));
+        $amount = $wifiInvoiceCaculator->calculateTotalAmount(new Ooredoo());
+
         return response()->json([
             'data' => $amount
         ]);

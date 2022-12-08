@@ -2,21 +2,15 @@
 
 namespace App\Services\InternetServiceProvider;
 
-class Mpt
+class Mpt implements Operator
 {
-    protected $operator = 'mpt';
-    
-    protected $month = 0;
-    
-    protected $monthlyFees = 200;
-    
-    public function setMonth(int $month)
+    public function getOperator(): string
     {
-        $this->month = $month;
+        return 'mpt';
     }
-    
-    public function calculateTotalAmount()
+
+    public function getMonthlyFees(): int
     {
-        return $this->month * $this->monthlyFees;
+        return 200;
     }
 }
