@@ -2,13 +2,14 @@
 
 namespace App\Services\EmployeeManagement;
 
-class Staff implements Employee
+class Staff
 {
-    public function applyJob()
-    {
-        // TODO: Implement applyJob() method.
-    }
-    
+    // why staff is employee? and why employee can apply job?
+    // public function applyJob()
+    // {
+    //     // TODO: Implement applyJob() method.
+    // }
+
     public function salary(): int
     {
         return 200;
