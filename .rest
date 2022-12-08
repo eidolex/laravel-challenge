@@ -1,0 +1,81 @@
+# @token = 4|ancXMrVhUXsi5x2u1HvSV7cAJh9wzT5m8M3kqsou
+
+# @name login
+POST  http://localhost:8000/api/login HTTP/1.1
+content-type: application/json
+Accept: application/json
+
+{
+    "email": "ohara.flavio@example.com",
+    "password": "password"
+}
+
+####
+
+@token = {{ login.response.body.token }}
+
+# get posts
+GET  http://localhost:8000/api/posts HTTP/1.1
+content-type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+
+# like post
+POST  http://localhost:8000/api/posts/reaction HTTP/1.1
+content-type: application/json
+Accept: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "post_id": 1,
+    "like": 1
+}
+
+###
+
+# unlike post
+POST  http://localhost:8000/api/posts/reaction HTTP/1.1
+content-type: application/json
+Accept: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "post_id": 1,
+    "like": 0
+}
+
+###
+
+# get mpt invoice
+POST  http://localhost:8000/api/mpt/invoice-amount HTTP/1.1
+content-type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+###
+
+# get mpt invoice
+POST  http://localhost:8000/api/ooredoo/invoice-amount HTTP/1.1
+content-type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+###
+
+# get apply job
+POST  http://localhost:8000/api/job/apply HTTP/1.1
+content-type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+###
+
+
+# get staff/salary
+POST  http://localhost:8000/api/staff/salary HTTP/1.1
+content-type: application/json
+Accept: application/json
+Authorization: Bearer {{token}}
+
+###
